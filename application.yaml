@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/burakasl/KubernetesConfig
+    targetRevision: HEAD
+    path: config
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      name: api-test-deployment
+      jsonPointers:
+        - /spec/replicas
