@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq-deployment
+  template:
+    metadata:
+      labels:
+        app: rabbitmq-deployment
+    spec:
+      containers:
+      - name: rabbitmq-deployment
+        image: burakasl/rabbitmq-test:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: RABBITMQ_HOST
+          value: "rabbitmq-service"

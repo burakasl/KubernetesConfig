@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: api-test
-        image: burakasl/kubernetes-test:1.0
+        image: burakasl/kubernetes-test:1.2
         ports:
         - containerPort: 80
         resources:
